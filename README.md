@@ -1,2 +1,2 @@
-# emp-mgmt
+# emp_mgmt
 Employee Management example
