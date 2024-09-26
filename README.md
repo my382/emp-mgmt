@@ -1,2 +1,2 @@
 # emp_mgmt
-Employee Management example
+Employee Management example using NodeJS and MongoDB
