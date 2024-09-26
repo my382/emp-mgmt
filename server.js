@@ -38,7 +38,8 @@ app.use('/employees', require('./routes/employee.routes'));
 app.use('/departments', require('./routes/department.routes'));
 
 app.get("/", (req, res) => {
-    res.redirect("/employees");
+    //res.redirect("/employees");
+    res.send('World of NodeJS and MongoDB');
 });
 
 //require("./routes/employee.routes")(app);
@@ -46,6 +47,7 @@ app.get("/", (req, res) => {
 
 // set port, listen for requests
 const PORT = process.env.NODE_LOCAL_PORT || 3020;
-app.listen(PORT, () => {
+const hostname = 'localhost';
+app.listen(PORT, hostname, () => {
     console.log(`Server is running on port ${PORT}.`);
 });
