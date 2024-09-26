@@ -1,0 +1,24 @@
+{
+  "name": "docker_mongo",
+  "version": "1.0.0",
+  "description": "docker-compose up -d",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "docker": "^1.0.0",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.0",
+    "http-server": "^14.1.1",
+    "mongo": "^0.1.0",
+    "mongod": "^2.0.0",
+    "mongodb": "^6.9.0",
+    "mongoose": "^8.6.3"
+  }
+}
