@@ -1,4 +1,4 @@
-FROM node:16
+FROM node
 
 WORKDIR /app
 
@@ -6,13 +6,11 @@ COPY package.json ./
 
 COPY package-lock.json ./
 
-RUN npm install
+RUN npm ci
 
 COPY server.js ./
 
-COPY . ./
-
 EXPOSE 8082
 
-CMD ["npm", "start"]
+CMD ["node", "server.js"]
 
