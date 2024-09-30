@@ -1,6 +1,8 @@
-const Employee = require("../models/employee");
-const Department = require("../models/department");
-
+// const Employee = require("../models/employee");
+// const Department = require("../models/department");
+const db = require('../models');
+const Employee = db.employees;
+const Department = db.departments;
 
 // Create and save a new employee
 
@@ -36,8 +38,9 @@ exports.create = (req, res) => {
 
 exports.findAll = (req, res) => {
     const employees = Employee.find({}).populate('department');
-    const departments = Department.find({});
-    res.send("Employees", { employees, departments });
+    // const departments = Department.find({});
+    // res.send("Employees", { employees, departments });
+    res.send(employees);
 };
 
 // Find a single employee with an id

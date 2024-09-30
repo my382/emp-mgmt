@@ -1,5 +1,6 @@
-const Department = require("../models/department");
-
+// const Department = require("../models/department");
+const db = require('../models');
+const Department = db.departments;
 
 // Create and save a new department
 
@@ -34,7 +35,8 @@ exports.create = (req, res) => {
 
 exports.findAll = (req, res) => {
     const departments = Department.find({});
-    res.send("departments", { departments });
+    //res.send("departments", { departments });
+    res.send(departments);
 };
 
 // Find a single employee with an id

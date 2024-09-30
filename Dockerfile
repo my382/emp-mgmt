@@ -8,9 +8,11 @@ COPY package-lock.json ./
 
 RUN npm ci
 
+COPY . ./
+
 COPY server.js ./
 
 EXPOSE 8082
 
-CMD ["node", "server.js"]
+CMD ["npm", "start"]
 
