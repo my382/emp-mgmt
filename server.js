@@ -11,11 +11,12 @@ var corsOptions = {
 
 app.use(cors(corsOptions));
 
+// parse requests of content-type - application/x-www-form-urlencoded
+app.use(express.urlencoded({ extended: true }));
+
 // parse requests of content-type - application/json
 app.use(express.json());
 
-// parse requests of content-type - application/x-www-form-urlencoded
-app.use(express.urlencoded({ extended: true }));
 
 const db = require("./models");
 db.mongoose
@@ -33,17 +34,15 @@ db.mongoose
 //     res.json({ message: "Welcome to Employee Management application." });
 // });
 
+const employeeRoutes = require('./routes/employee.routes');
+const departmentRoutes = require('./routes/department.routes');
 
-app.use('/employees', require('./routes/employee.routes'));
-app.use('/departments', require('./routes/department.routes'));
+app.use('/employee', employeeRoutes);
+app.use('/department', departmentRoutes);
 
 app.get("/", (req, res) => {
-    //res.redirect("/employees");
-    res.send('World of NodeJS and MongoDB');
+    res.send('Employee management system using NodeJS and MongoDB.');
 });
-
-//require("./routes/employee.routes")(app);
-//require("./routes/department.routes")(app);
 
 // set port, listen for requests
 const PORT = process.env.NODE_LOCAL_PORT || 3020;

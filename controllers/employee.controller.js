@@ -2,11 +2,11 @@
 // const Department = require("../models/department");
 const db = require('../models');
 const Employee = db.employees;
-const Department = db.departments;
+
 
 // Create and save a new employee
 
-exports.create = (req, res) => {
+const create = (req, res) => {
     // Validate request
     if (!req.body.firstName) {
         res.status(400).send({ message: "Content cannot be empty!" });
@@ -14,11 +14,12 @@ exports.create = (req, res) => {
     }
 
     // Create an employee
-    var employee = new Employee({
+    const employee = new Employee({
         firstName: req.body.firstName,
         lastName: req.body.lastName,
         department: req.body.department
     });
+
 
     // Save Employee in the database
     Employee
@@ -36,15 +37,15 @@ exports.create = (req, res) => {
 
 // Retrieve all employees from the database
 
-exports.findAll = (req, res) => {
-    const employees = Employee.find({}).populate('department');
+const findAll = (req, res) => {
+    const employees = Employee.find().populate('department');
     // const departments = Department.find({});
     // res.send("Employees", { employees, departments });
     res.send(employees);
 };
 
 // Find a single employee with an id
-exports.findOne = (req, res) => {
+const findOne = (req, res) => {
     const id = req.params.id;
 
     Employee.findById(id)
@@ -62,7 +63,7 @@ exports.findOne = (req, res) => {
 };
 
 // Update an employee with id in the request
-exports.update = (req, res) => {
+const update = (req, res) => {
     if (!res.body) {
         return res.status(400).send({
             message: "Data to update employee can not be empty!"
@@ -86,7 +87,7 @@ exports.update = (req, res) => {
 };
 
 // Delete an employee with the specified id in the request
-exports.delete = (req, res) => {
+const deleteOne = (req, res) => {
     const id = req.params.id;
 
     Employee.findByIdAndRemove(id, { useFindAndModify: false })
@@ -109,8 +110,8 @@ exports.delete = (req, res) => {
 };
 
 // Delete all Employees from the database.
-exports.deleteAll = (req, res) => {
-    Employee.deleteMany({})
+const deleteAll = (req, res) => {
+    Employee.deleteMany()
         .then(data => {
             res.send({
                 message: `${data.deletedCount} Employees were deleted successfully!`
@@ -122,6 +123,15 @@ exports.deleteAll = (req, res) => {
                     err.message || "Some error occurred while removing all employees."
             });
         });
+};
+
+module.exports = {
+    create,
+    findAll,
+    findOne,
+    update,
+    deleteOne,
+    deleteAll
 };
 
 
