@@ -3,7 +3,7 @@ module.exports = app => {
 
     const departmentController = require('../controllers/department.controller');
 
-    var departmentRouter = require('express').Router();
+    const departmentRouter = require('express').Router();
 
     // Create a new department
     departmentRouter.post("/department/create/", departmentController.create);
