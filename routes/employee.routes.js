@@ -1,23 +1,28 @@
-const employeeController = require('../controllers/employee.controller');
+module.exports = app => {
 
-const employeeRouter = require('express').Router();
+    const employeeController = require('../controllers/employee.controller');
 
-// Create a new employee
-employeeRouter.post("/employee/create/", employeeController.create);
+    var employeeRouter = require('express').Router();
 
-// Retrieve all employees
-employeeRouter.get("/employee", employeeController.findAll);
+    // Create a new employee
+    employeeRouter.post("/employee/create/", employeeController.create);
 
-// Retrieve a single employee with id
-employeeRouter.get("/employee/:id", employeeController.findOne);
+    // Retrieve all employees
+    employeeRouter.get("/employee", employeeController.findAll);
 
-// Update an employee with id
-employeeRouter.put("/employee/:id", employeeController.update);
+    // Retrieve a single employee with id
+    employeeRouter.get("/employee/:id", employeeController.findOne);
 
-// Delete an employee with id
-employeeRouter.delete("/employee/:id", employeeController.deleteOne);
+    // Update an employee with id
+    employeeRouter.put("/employee/:id", employeeController.update);
 
-// Delete all employees
-employeeRouter.delete("/employee", employeeController.deleteAll);
+    // Delete an employee with id
+    employeeRouter.delete("/employee/:id", employeeController.deleteOne);
 
-module.exports = employeeRouter;
+    // Delete all employees
+    employeeRouter.delete("/employee", employeeController.deleteAll);
+
+    //app.use("api/employees", employeeRouter);
+
+};
+
