@@ -1,0 +1,32 @@
+<!-- views/employees.ejs code... -->
+
+<%- include('layout') %>
+
+    <h2 class="employees-heading">Books</h2>
+    <form action="/employee/create/" method="POST">
+
+        <label for="firstName">First Name</label>
+        <input type="text" name="firstName" id="firstName" required>
+
+        <label for="lastName">Last Name</label>
+        <input type="text" name="lastName" id="lastName" required>
+
+        <label for="department">Department</label>
+        <select name="department" id="department" required>
+            <% departments.forEach(department=> { %>
+                <option value="<%= department._id %>">
+                    <%= department.name %>
+                </option>
+                <% }) %>
+        </select>
+
+        <button type="submit">Add Employee</button>
+    </form>
+
+    <ul class="employee-lists">
+        <% employees.forEach(employee => { %>
+            <li>
+                <%= employee.firstName - employee.lastName %>
+            </li>
+            <% }) %>
+    </ul>

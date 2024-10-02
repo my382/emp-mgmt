@@ -21,7 +21,8 @@ const create = (req, res) => {
     Department
         .save(department)
         .then(data => {
-            res.send(data);
+            res.redirect("/departmment");
+            //res.send(data);
         })
         .catch(err => {
             res.status(500).send({
@@ -35,8 +36,8 @@ const create = (req, res) => {
 
 const findAll = (req, res) => {
     const departments = Department.find();
-    //res.send("departments", { departments });
-    res.send(departments);
+    res.render("department", { departments });
+    //res.send(departments);
 };
 
 // Find a single employee with an id
@@ -47,8 +48,11 @@ const findOne = (req, res) => {
         .then(data => {
             if (!data)
                 res.status(404).send({ message: "Not found Department with id " + id });
-            else
-                res.send(data);
+            else {
+                res.render(data);
+                //res.send(data);
+            }
+
 
         })
         .catch(err => {
@@ -72,7 +76,11 @@ const update = (req, res) => {
                 res.status(404).send({
                     message: `Cannot update department with id=${id}. Maybe department was not found!`
                 });
-            } else res.send({ message: "A department was updated successfully." });
+            } else {
+                res.redirect("/department");
+                //res.send({ message: "A department was updated successfully." });
+            }
+
         })
         .catch(err => {
             res.status(500).send({
@@ -92,9 +100,10 @@ const deleteOne = (req, res) => {
                     message: `Cannot delete a department with id=${id}. Maybe department was not found!`
                 });
             } else {
-                res.send({
-                    message: "A department was deleted successfully!"
-                });
+                res.redirect("/department");
+                // res.send({
+                //     message: "A department was deleted successfully!"
+                // });
             }
         })
         .catch(err => {

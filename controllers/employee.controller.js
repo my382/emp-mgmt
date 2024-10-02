@@ -25,7 +25,8 @@ const create = (req, res) => {
     Employee
         .save(employee)
         .then(data => {
-            res.send(data);
+            //res.send(data);
+            res.redirect("/employee");
         })
         .catch(err => {
             res.status(500).send({
@@ -41,7 +42,8 @@ const findAll = (req, res) => {
     const employees = Employee.find().populate('department');
     // const departments = Department.find({});
     // res.send("Employees", { employees, departments });
-    res.send(employees);
+    //res.send(employees);
+    res.render("employee", { employees })
 };
 
 // Find a single employee with an id
@@ -50,11 +52,13 @@ const findOne = (req, res) => {
 
     Employee.findById(id)
         .then(data => {
-            if (!data)
+            if (!data) {
                 res.status(404).send({ message: "Not found Employee with id " + id });
-            else
-                res.send(data);
-
+            }
+            else {
+                res.render(data);
+                //res.send(data);
+            }
         })
         .catch(err => {
             res.status(500).
@@ -77,7 +81,10 @@ const update = (req, res) => {
                 res.status(404).send({
                     message: `Cannot update employee with id=${id}. Maybe employee was not found!`
                 });
-            } else res.send({ message: "An employee was updated successfully." });
+            } else {
+                res.redirect("/employee");
+                //res.send({ message: "An employee was updated successfully." });
+            }
         })
         .catch(err => {
             res.status(500).send({
@@ -97,9 +104,10 @@ const deleteOne = (req, res) => {
                     message: `Cannot delete an employee with id=${id}. Maybe employee was not found!`
                 });
             } else {
-                res.send({
-                    message: "An employee was deleted successfully!"
-                });
+                res.redirect("/employee");
+                // res.send({
+                //     message: "An employee was deleted successfully!"
+                // });
             }
         })
         .catch(err => {

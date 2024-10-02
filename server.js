@@ -11,8 +11,12 @@ var corsOptions = {
 
 app.use(cors(corsOptions));
 
+app.set("view engine", "ejs");
+
 // parse requests of content-type - application/x-www-form-urlencoded
 app.use(express.urlencoded({ extended: true }));
+
+app.use(express.static("public"));
 
 // parse requests of content-type - application/json
 app.use(express.json());
@@ -41,7 +45,8 @@ app.use('/employee', employeeRoutes);
 app.use('/department', departmentRoutes);
 
 app.get("/", (req, res) => {
-    res.send('Employee management system using NodeJS and MongoDB.');
+    res.redirect("/employee");
+    //res.send('Employee management system using NodeJS and MongoDB.');
 });
 
 // set port, listen for requests

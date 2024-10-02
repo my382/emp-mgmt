@@ -1,0 +1,22 @@
+<!-- views/departments.ejs code... -->
+
+<%- include('layout') %>
+
+    <h2 class="departments-heading">Authors</h2>
+    <form action="/department/create/" method="POST">
+        <label for="name">Name</label>
+        <input type="text" name="name" id="name" required>
+
+        <label for="description">Description</label>
+        <input type="text" name="description" id="description" required>
+
+        <button type="submit">Add Department</button>
+    </form>
+
+    <ul class="department-lists">
+        <% departments.forEach(department=> { %>
+            <li>
+                <%= department.name - department.description %>
+            </li>
+            <% }) %>
+    </ul>
