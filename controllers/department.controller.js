@@ -1,9 +1,10 @@
-const Department = require("../models/department");
-
+// const Department = require("../models/department");
+const db = require('../models');
+const Department = db.departments;
 
 // Create and save a new department
 
-exports.create = (req, res) => {
+const create = (req, res) => {
     // Validate request
     if (!req.body.name) {
         res.status(400).send({ message: "Content cannot be empty!" });
@@ -11,7 +12,7 @@ exports.create = (req, res) => {
     }
 
     // Create a department
-    var department = new Department({
+    const department = new Department({
         name: req.body.name,
         description: req.body.description
     });
@@ -32,13 +33,14 @@ exports.create = (req, res) => {
 
 // Retrieve all departments from the database
 
-exports.findAll = (req, res) => {
-    const departments = Department.find({});
-    res.send("departments", { departments });
+const findAll = (req, res) => {
+    const departments = Department.find();
+    //res.send("departments", { departments });
+    res.send(departments);
 };
 
 // Find a single employee with an id
-exports.findOne = (req, res) => {
+const findOne = (req, res) => {
     const id = req.params.id;
 
     Department.findById(id)
@@ -56,7 +58,7 @@ exports.findOne = (req, res) => {
 };
 
 // Update a department with id in the request
-exports.update = (req, res) => {
+const update = (req, res) => {
     if (!res.body) {
         return res.status(400).send({
             message: "Data to update department can not be empty!"
@@ -80,7 +82,7 @@ exports.update = (req, res) => {
 };
 
 // Delete a department with the specified id in the request
-exports.delete = (req, res) => {
+const deleteOne = (req, res) => {
     const id = req.params.id;
 
     Employee.findByIdAndRemove(id, { useFindAndModify: false })
@@ -103,8 +105,8 @@ exports.delete = (req, res) => {
 };
 
 // Delete all Departments from the database.
-exports.deleteAll = (req, res) => {
-    Employee.deleteMany({})
+const deleteAll = (req, res) => {
+    Employee.deleteMany()
         .then(data => {
             res.send({
                 message: `${data.deletedCount} Departments were deleted successfully!`
@@ -118,5 +120,13 @@ exports.deleteAll = (req, res) => {
         });
 };
 
+module.exports = {
+    create,
+    findAll,
+    findOne,
+    update,
+    deleteOne,
+    deleteAll
+};
 
 
