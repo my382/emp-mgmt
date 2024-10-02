@@ -2,7 +2,7 @@ module.exports = app => {
 
     const employeeController = require('../controllers/employee.controller');
 
-    var employeeRouter = require('express').Router();
+    const employeeRouter = require('express').Router();
 
     // Create a new employee
     employeeRouter.post("/employee/create/", employeeController.create);
