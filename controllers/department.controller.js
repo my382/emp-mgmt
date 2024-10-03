@@ -36,8 +36,7 @@ const create = (req, res) => {
 
 const findAll = (req, res) => {
     const departments = Department.find();
-    res.render("department", { departments });
-    //res.send(departments);
+    res.render("department", { departments: departments });
 };
 
 // Find a single employee with an id
@@ -49,11 +48,14 @@ const findOne = (req, res) => {
             if (!data)
                 res.status(404).send({ message: "Not found Department with id " + id });
             else {
-                res.render(data);
-                //res.send(data);
+                const department = {
+                    _id: data._id, 
+                    name: data.name, 
+                    description: data.description
+                }
+                res.render('department', { department: department });
+                
             }
-
-
         })
         .catch(err => {
             res.status(500).

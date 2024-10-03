@@ -3,14 +3,26 @@
 <%- include('layout') %>
 
     <h2 class="departments-heading">Departments</h2>
-    <form action="/department/create/" method="POST">
+    <form action="<% if (department._id > 0 ) { %> 
+        '/department/update/<%= department._id %>' 
+        <% } else { %> 
+        '/department/create/'
+        <% } %>" method="<% if (department._id > 0 ) { %> 
+           'PUT' 
+           <% } else { %> 
+           'POST'
+           <% } %>">
+
+        <input type="hidden" name="_id"  id="_id" value="<%= department._id %>">
         <label for="name">Name</label>
-        <input type="text" name="name" id="name" required>
+        <input type="text" name="name" id="name" required><%= department.name %></input>
 
         <label for="description">Description</label>
-        <input type="text" name="description" id="description" required>
+        <input type="text" name="description" id="description" required><%= department.description %></input>
 
-        <button type="submit">Add Department</button>
+        <button type="submit">
+        <% if (department._id > 0 ) { %> Update Department <% } else {  %> Add Department <% } %>
+        </button>
     </form>
 
     <ul class="department-lists">
@@ -19,7 +31,10 @@
                 <%= department.name %> - <%= department.description %>
             </li>
             <li>
-                <a class="btn btn-raised btn-danger" href="/department/<%= department._id %>">Delete</a>
+                <a class="btn btn-raised btn-primary" href="/department/edit/<%= department._id %>">Edit</a>
+            </li>
+            <li>
+                <a class="btn btn-raised btn-danger" href="/department/delete/<%= department._id %>">Delete</a>
             </li>
             <% }) %>
     </ul>

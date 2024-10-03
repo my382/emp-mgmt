@@ -11,13 +11,13 @@ module.exports = app => {
     employeeRouter.get("/employee", employeeController.findAll);
 
     // Retrieve a single employee with id
-    employeeRouter.get("/employee/:id", employeeController.findOne);
+    employeeRouter.get("/employee/edit/:id", employeeController.findOne);
 
     // Update an employee with id
-    employeeRouter.put("/employee/:id", employeeController.update);
+    employeeRouter.put("/employee/update/:id", employeeController.update);
 
     // Delete an employee with id
-    employeeRouter.delete("/employee/:id", employeeController.deleteOne);
+    employeeRouter.delete("/employee/delete/:id", employeeController.deleteOne);
 
     // Delete all employees
     employeeRouter.delete("/employee", employeeController.deleteAll);

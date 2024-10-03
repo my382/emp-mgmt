@@ -3,13 +3,23 @@
 <%- include('layout') %>
 
     <h2 class="employees-heading">Employees</h2>
-    <form action="/employee/create/" method="POST">
+    <form action="<% if (employee._id > 0 ) { %> 
+                 '/employee/update/<%= employee._id %>' 
+                 <% } else { %> 
+                 '/employee/create/'
+                 <% } %>" method="<% if (employee._id > 0 ) { %> 
+                    'PUT' 
+                    <% } else { %> 
+                    'POST'
+                    <% } %>">
+
+        <input type="hidden" name="_id" id="_id" value="<%= employee._id >">
 
         <label for="firstName">First Name</label>
-        <input type="text" name="firstName" id="firstName" required>
+        <input type="text" name="firstName" id="firstName" required><%= employee.firstName ></input>
 
         <label for="lastName">Last Name</label>
-        <input type="text" name="lastName" id="lastName" required>
+        <input type="text" name="lastName" id="lastName" required><%= employee.lastName ></input>
 
         <label for="department">Department</label>
         <select name="department" id="department" required>
@@ -20,7 +30,9 @@
                 <% }) %>
         </select>
 
-        <button type="submit">Add Employee</button>
+        <button type="submit">
+            <% if (employee._id > 0 ) { %> Update Employee <% } else {  %> Add Employee <% } %>
+        </button>
     </form>
 
     <ul class="employee-lists">
@@ -29,7 +41,10 @@
                 <%= employee.firstName %> - <%= employee.lastName %>
             </li>
             <li>
-                <a class="btn btn-raised btn-danger" href="/employee/<%= employee._id %>">Delete</a>
+                <a class="btn btn-raised btn-primary" href="/employee/edit/<%= employee._id %>">Edit</a>
+            </li>
+            <li>
+                <a class="btn btn-raised btn-danger" href="/employee/delete/<%= employee._id %>">Delete</a>
             </li>
             <% }) %>
     </ul>

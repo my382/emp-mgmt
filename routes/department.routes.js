@@ -15,10 +15,10 @@ module.exports = app => {
     departmentRouter.get("/department/:id", departmentController.findOne);
 
     // Update an department with id
-    departmentRouter.put("/department/:id", departmentController.update);
+    departmentRouter.put("/department/update/:id", departmentController.update);
 
     // Delete an department with id
-    departmentRouter.delete("/department/:id", departmentController.deleteOne);
+    departmentRouter.delete("/department/delete/:id", departmentController.deleteOne);
 
     // Delete all departments
     departmentRouter.delete("/department", departmentController.deleteAll);

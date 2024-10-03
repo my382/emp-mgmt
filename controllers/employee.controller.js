@@ -40,10 +40,7 @@ const create = (req, res) => {
 
 const findAll = (req, res) => {
     const employees = Employee.find().populate('department');
-    // const departments = Department.find({});
-    // res.send("Employees", { employees, departments });
-    //res.send(employees);
-    res.render("employee", { employees })
+    res.render("employee", { employees: employees });
 };
 
 // Find a single employee with an id
@@ -56,8 +53,13 @@ const findOne = (req, res) => {
                 res.status(404).send({ message: "Not found Employee with id " + id });
             }
             else {
-                res.render(data);
-                //res.send(data);
+                const employee = {
+                    _id: data._id, 
+                    firstName: data.firstName, 
+                    lastName: data.lastName, 
+                    department: data.department
+                };
+                res.render('employee', { employee: employee });
             }
         })
         .catch(err => {
