@@ -48,7 +48,7 @@ const findAll = (req, res) => {
 
 // Find a single employee with an id
 const findOne = (req, res) => {
-    const id = req.params.id;
+    const id = Number(req.params.id);
 
     Employee.findById(id)
         .then(data => {
@@ -73,7 +73,7 @@ const update = (req, res) => {
             message: "Data to update employee can not be empty!"
         });
     }
-    const id = req.params.id;
+    const id = Number(req.params.id);
 
     Employee.findByIdAndUpdate(id, req.body, { useFindAndModify: false })
         .then(data => {
@@ -95,7 +95,7 @@ const update = (req, res) => {
 
 // Delete an employee with the specified id in the request
 const deleteOne = (req, res) => {
-    const id = req.params.id;
+    const id = Number(req.params.id);
 
     Employee.findByIdAndRemove(id, { useFindAndModify: false })
         .then(data => {

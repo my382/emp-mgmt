@@ -16,7 +16,10 @@
     <ul class="department-lists">
         <% departments.forEach(department=> { %>
             <li>
-                <%= department.name - department.description %>
+                <%= department.name %> - <%= department.description %>
+            </li>
+            <li>
+                <a class="btn btn-raised btn-danger" href="/department/<%= department._id %>">Delete</a>
             </li>
             <% }) %>
     </ul>

@@ -26,7 +26,10 @@
     <ul class="employee-lists">
         <% employees.forEach(employee => { %>
             <li>
-                <%= employee.firstName - employee.lastName %>
+                <%= employee.firstName %> - <%= employee.lastName %>
+            </li>
+            <li>
+                <a class="btn btn-raised btn-danger" href="/employee/<%= employee._id %>">Delete</a>
             </li>
             <% }) %>
     </ul>
