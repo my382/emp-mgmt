@@ -21,8 +21,7 @@ const create = (req, res) => {
     Department
         .save(department)
         .then(data => {
-            res.redirect("/departmment");
-            //res.send(data);
+            res.redirect("/");
         })
         .catch(err => {
             res.status(500).send({
