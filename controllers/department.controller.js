@@ -34,9 +34,9 @@ const create = (req, res) => {
 
 // Retrieve all departments from the database
 
-const findAll = (req, res) => {
-    const departments = Department.find();
-    res.render("department", { departments: departments });
+const findAll = async (req, res) => {
+    const departments = await Department.find();
+    res.render("departments", { departments });
 };
 
 // Find a single employee with an id
@@ -49,12 +49,12 @@ const findOne = (req, res) => {
                 res.status(404).send({ message: "Not found Department with id " + id });
             else {
                 const department = {
-                    _id: data._id, 
-                    name: data.name, 
+                    _id: data._id,
+                    name: data.name,
                     description: data.description
                 }
                 res.render('department', { department: department });
-                
+
             }
         })
         .catch(err => {

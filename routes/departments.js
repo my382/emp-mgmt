@@ -9,7 +9,7 @@ module.exports = app => {
     departmentRouter.post("/department/create/", departmentController.create);
 
     // Retrieve all departments
-    departmentRouter.get("/department", departmentController.findAll);
+    departmentRouter.get("/", departmentController.findAll);
 
     // Retrieve a single department with id
     departmentRouter.get("/department/:id", departmentController.findOne);

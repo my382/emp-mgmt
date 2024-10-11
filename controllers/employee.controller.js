@@ -2,6 +2,7 @@
 // const Department = require("../models/department");
 const db = require('../models');
 const Employee = db.employees;
+const Department = db.departments;
 
 
 // Create and save a new employee
@@ -38,9 +39,11 @@ const create = (req, res) => {
 
 // Retrieve all employees from the database
 
-const findAll = (req, res) => {
-    const employees = Employee.find().populate('department');
-    res.render("employee", { employees: employees });
+const findAll = async (req, res) => {
+    alert('Employee Controller findAll called');
+    const employees = await Employee.find().populate('department');
+    const departments = await Department.find();
+    res.render("employees", { employees, departments });
 };
 
 // Find a single employee with an id
@@ -54,9 +57,9 @@ const findOne = (req, res) => {
             }
             else {
                 const employee = {
-                    _id: data._id, 
-                    firstName: data.firstName, 
-                    lastName: data.lastName, 
+                    _id: data._id,
+                    firstName: data.firstName,
+                    lastName: data.lastName,
                     department: data.department
                 };
                 res.render('employee', { employee: employee });

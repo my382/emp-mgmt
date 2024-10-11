@@ -8,7 +8,7 @@ module.exports = app => {
     employeeRouter.post("/employee/create/", employeeController.create);
 
     // Retrieve all employees
-    employeeRouter.get("/employee", employeeController.findAll);
+    employeeRouter.get("/", employeeController.findAll);
 
     // Retrieve a single employee with id
     employeeRouter.get("/employee/edit/:id", employeeController.findOne);

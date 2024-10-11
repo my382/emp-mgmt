@@ -33,19 +33,14 @@ db.mongoose
         process.exit();
     });
 
-// simple route
-// app.get("/", (req, res) => {
-//     res.json({ message: "Welcome to Employee Management application." });
-// });
+const employeeRoutes = require('./routes/employees');
+const departmentRoutes = require('./routes/departments');
 
-const employeeRoutes = require('./routes/employee.routes');
-const departmentRoutes = require('./routes/department.routes');
-
-app.use('/employee', employeeRoutes);
-app.use('/department', departmentRoutes);
+app.use('/employees', employeeRoutes);
+app.use('/departments', departmentRoutes);
 
 app.get("/", (req, res) => {
-    res.redirect("/employee");
+    res.redirect("/employees");
     //res.send('Employee management system using NodeJS and MongoDB.');
 });
 
