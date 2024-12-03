@@ -20,6 +20,6 @@
     "mongo": "^0.1.0",
     "mongod": "^2.0.0",
     "mongodb": "^6.9.0",
-    "mongoose": "^8.6.3"
+    "mongoose": "^8.8.3"
   }
 }
